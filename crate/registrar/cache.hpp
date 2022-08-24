@@ -26,7 +26,10 @@ public:
       KNOWN,
       UNKNOWN_NODE,
       UNKNOWN_NODE_SENSOR,
-      UNABLE_TO_REACH_REGISTRAR
+      UNABLE_TO_REACH_REGISTRAR,
+      REGISTRAR_INTERNAL_ERROR,
+      CACHE_INTERNAL_ERROR,
+      BAD_FETCH
    };
 
    cache() = delete;
@@ -63,9 +66,9 @@ public:
 
 private:
    struct cache_entry {
-      std::size_t item;
+      std::size_t hash;
       std::chrono::time_point<
-         std::chrono::system_clock> last_check_in; 
+         std::chrono::system_clock> retrieved; 
    };
 
    std::string _registrar_address;
@@ -76,9 +79,9 @@ private:
    std::mutex _mutex;
    double _prune_time {DEFAULT_PRUNE_TIME_SEC};
 
-   std::tuple<bool, result> check_registrar(const size_t hash, 
-                                       const std::string& node, 
-                                       const std::string& sensor);
+   result check_registrar(const size_t hash, 
+                           const std::string& node, 
+                           const std::string& sensor);
 };
 
 } // namespace registrar

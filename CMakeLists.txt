@@ -13,12 +13,14 @@ set(HEADERS
     ${CMAKE_SOURCE_DIR}/crate/externals/simplejson/json.hpp
     ${CMAKE_SOURCE_DIR}/crate/common/common.hpp
     ${CMAKE_SOURCE_DIR}/crate/registrar/cache.hpp
+    ${CMAKE_SOURCE_DIR}/crate/registrar/entry/node_v1.hpp
 )
 
 set(SOURCES
    ${CMAKE_SOURCE_DIR}/crate/externals/simplejson/json.cpp
    ${CMAKE_SOURCE_DIR}/crate/common/common.cpp
    ${CMAKE_SOURCE_DIR}/crate/registrar/cache.cpp
+   ${CMAKE_SOURCE_DIR}/crate/registrar/entry/node_v1.cpp
 )
 
 include(${CMAKE_SOURCE_DIR}/cmake/LibraryConfig.cmake)
