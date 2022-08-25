@@ -4,6 +4,9 @@
 #include <crate/registrar/cache.hpp>
 #include <crate/registrar/entry/node_v1.hpp>
 
+#include <thread>
+using namespace std::chrono_literals;
+
 void get_item(crate::registrar::cache& registrar_cache, std::string node, std::string sensor)
 {
    switch(registrar_cache.check_cache_for_node_sensor(node, sensor)) {
@@ -67,10 +70,24 @@ int main(int argc, char** argv) {
    crate::common::setup_logger("cacheApp", AixLog::Severity::debug);
    crate::registrar::cache registrar_cache("0.0.0.0", 4096);
 
+   // Set prune time to 1 second to ensure we prune
+   registrar_cache.set_prune_time(1.0);
+
    get_item(registrar_cache, "house_node", "0000-0000-0001");  // Should exist
    get_item(registrar_cache, "house_node", "0000-0000-0000");  // Should exist
    get_item(registrar_cache, "house_node", "0000-0000-0001");  // Should be cached
    get_item(registrar_cache, "house_node", "0000-0000-0002");  // No exist
+
+   // Sleep for 2s
+   std::this_thread::sleep_for(2s);
+
+   // Prune
+   registrar_cache.prune();
+
+   // Re-retrieve thing
+   get_item(registrar_cache, "house_node", "0000-0000-0001");  // Shouldn't exist anymore
+   get_item(registrar_cache, "house_node", "0000-0000-0001"); 
+   get_item(registrar_cache, "house_node", "0000-0000-0001"); 
 
    return 0;
 }

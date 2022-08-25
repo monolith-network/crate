@@ -39,18 +39,23 @@ public:
    //! \param registrar_port The port of the registrar
    cache(const std::string& registrar_address, short registrar_port);
 
+   //! \brief Check if a node exists
+   //! \param node The node that we want to check if it exists
+   //! \returns A result enumeration specifying if node is known or not
+   result check_cache_for_node(const std::string& node);
+
    //! \brief Check if a node exists and if a specific sensor belongs to that node
-   //! \param node The node that we wan't to check if it exists
+   //! \param node The node that we want to check if it exists
    //! \param sensor The name of the sensor to check belongs to the node
    //! \returns A result enumeration specifying if everything is known, or if not, 
    //!          what isn't known
    result check_cache_for_node_sensor(const std::string& node, const std::string& sensor);
 
-   //! \brief Update the time that the data will prune
+   //! \brief Set the time that the data will prune
    //! \param seconds The new prune time that will be used
    //! \post  The new prune time will be used to gauge when an 
    //!        item should be removed from the cache
-   void update_prune_time(const double seconds);
+   void set_prune_time(const double seconds);
 
    //! \brief Run through the known items and perform a prune of old data
    //!        WARNING: This is an expensive operation, but it is necessary. 
@@ -68,7 +73,7 @@ private:
    struct cache_entry {
       std::size_t hash;
       std::chrono::time_point<
-         std::chrono::system_clock> retrieved; 
+         std::chrono::high_resolution_clock > retrieved; 
    };
 
    std::string _registrar_address;
