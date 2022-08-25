@@ -17,6 +17,7 @@ set(HEADERS
     ${CMAKE_SOURCE_DIR}/crate/registrar/submitter.hpp
     ${CMAKE_SOURCE_DIR}/crate/registrar/retriever.hpp
     ${CMAKE_SOURCE_DIR}/crate/registrar/entry/node_v1.hpp
+    ${CMAKE_SOURCE_DIR}/crate/metrics/reading.hpp
 )
 
 set(SOURCES
@@ -27,6 +28,7 @@ set(SOURCES
    ${CMAKE_SOURCE_DIR}/crate/registrar/submitter.cpp
    ${CMAKE_SOURCE_DIR}/crate/registrar/retriever.cpp
    ${CMAKE_SOURCE_DIR}/crate/registrar/entry/node_v1.cpp
+   ${CMAKE_SOURCE_DIR}/crate/metrics/reading.cpp
 )
 
 include(${CMAKE_SOURCE_DIR}/cmake/LibraryConfig.cmake)
