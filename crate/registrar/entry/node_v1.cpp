@@ -5,8 +5,10 @@ namespace registrar {
 
 node_v1::node_v1(){}
 
-bool node_v1::decode_from(const std::string& json_data)
-{
+node_v1::node_v1(const std::string& id) : _id(id) {}
+
+bool node_v1::decode_from(const std::string& json_data) {
+
    json::jobject json_result;
    if (!json::jobject::tryparse(json_data.c_str(), json_result)) {
       return false;
@@ -14,8 +16,7 @@ bool node_v1::decode_from(const std::string& json_data)
    return decode_from(json_result);
 }
 
-bool node_v1::decode_from(json::jobject json_object)
-{
+bool node_v1::decode_from(json::jobject json_object) {
 
    if (!json_object.has_key("id")) {
       return false;
@@ -34,8 +35,8 @@ bool node_v1::decode_from(json::jobject json_object)
       return false;
    }
 
-   id = json_object["id"].as_string();
-   description = json_object["description"].as_string();
+   _id = json_object["id"].as_string();
+   _description = json_object["description"].as_string();
 
    if (suspected_sensor_list.size() == 0) {
       check_validity();
@@ -69,16 +70,16 @@ bool node_v1::decode_from(json::jobject json_object)
    return !_invalid;
 }
 
-bool node_v1::encode_to(std::string& output_string)
-{
+bool node_v1::encode_to(std::string& output_string) {
+
    check_validity();
    if (_invalid) {
       return false;
    }
 
    output_string.clear();
-   std::string s = "{\"id\":\"" + id + 
-                   "\",\"description\":\"" + description +
+   std::string s = "{\"id\":\"" + _id + 
+                   "\",\"description\":\"" + _description +
                    "\",\"sensors\":[";
 
    if (_sensor_list.empty()) {
@@ -101,18 +102,15 @@ bool node_v1::encode_to(std::string& output_string)
    return true;   
 }
 
-void node_v1::set_id(const std::string& id)
-{
-   this->id = id;
+void node_v1::set_id(const std::string& id) {
+   _id = id;
 }
 
-void node_v1::set_description(const std::string& description)
-{
-   this->description = description;
+void node_v1::set_description(const std::string& description) {
+   _description = description;
 }
 
-bool node_v1::add_sensor(node_v1::sensor new_sensor)
-{
+bool node_v1::add_sensor(node_v1::sensor new_sensor) {
    if (new_sensor.id.empty()) {
       return false;
    }
@@ -127,9 +125,8 @@ bool node_v1::add_sensor(node_v1::sensor new_sensor)
    return true;
 }
 
-void node_v1::check_validity()
-{
-   if (id.empty()) {
+void node_v1::check_validity() {
+   if (_id.empty()) {
       _invalid = true;
       return;
    }
@@ -141,7 +138,14 @@ std::tuple<
    std::string, 
    std::vector<node_v1::sensor> 
       > node_v1::get_data() const {
-   return {id, description, _sensor_list};
+   return {_id, _description, _sensor_list};
+}
+
+void node_v1::clear() {
+   _invalid = true;
+   _id.clear();
+   _description.clear();
+   _sensor_list.clear();
 }
 
 } // namespace registrar

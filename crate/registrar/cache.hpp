@@ -9,13 +9,36 @@
 #include <chrono>
 #include <tuple>
 
+/*
+   About:
+      The cache hashes the node string and if it is given a sensor it combines the hash of 
+      the sensor name. 
+
+      Upon querying if an item exists the primary cache is checked to see if that hash exists,
+      if it does not exist then it reaches out to the registrar to check for the information.
+
+      If we are simply looking for a node, we use the /probe endpoint
+      If we are looking for a node + sensor, we use the /fetch endpoint
+
+      At any given time if a step fails, a cache::result is sent back to identify what
+      happened. 
+
+      If the item being searched for is found, then we cache it and store a cache_entry
+      in _cache_items that will be used later during a `prune`
+
+      The cache doesn't auto prune as the cache doesn't have enough information about
+      the target application to know when the best time to prune is as pruning is expensive
+      and locks the cache. For this reason, the caller must call prune to ensure that 
+      false positives are not sent back.
+*/
+
 namespace crate {
 namespace registrar {
 
 //! \brief A class that interfaces with and caches results from the
 //!        node registrar application for the sake of determining if
 //!        a node exists, and if so, if a given sensor is registered as 
-//!        being part of it.
+//!        being part of it and caches it for quicker access.
 class cache {
 public:
 
@@ -29,9 +52,11 @@ public:
       UNABLE_TO_REACH_REGISTRAR,
       REGISTRAR_INTERNAL_ERROR,
       CACHE_INTERNAL_ERROR,
+      FAILED_DECODE,
       BAD_FETCH
    };
 
+   //! \brief Remove the default constructor
    cache() = delete;
 
    //! \brief Create the node cache
@@ -83,10 +108,14 @@ private:
    std::vector<cache_entry> _cache_items;
    std::mutex _mutex;
    double _prune_time {DEFAULT_PRUNE_TIME_SEC};
+   std::string _probe_nonce;
 
    result check_registrar(const size_t hash, 
                            const std::string& node, 
                            const std::string& sensor);
+   result probe_registrar(const size_t hash, 
+                           const std::string& node);
+   void cache_item(const size_t hash);
 };
 
 } // namespace registrar

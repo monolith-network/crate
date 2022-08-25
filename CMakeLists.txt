@@ -11,15 +11,21 @@ include_directories($CMAKE_SOURCE_DIR/crate)
 set(HEADERS
     ${CMAKE_SOURCE_DIR}/crate/externals/aixlog/logger.hpp
     ${CMAKE_SOURCE_DIR}/crate/externals/simplejson/json.hpp
+    ${CMAKE_SOURCE_DIR}/crate/externals/uuid4/uuid4.h
     ${CMAKE_SOURCE_DIR}/crate/common/common.hpp
     ${CMAKE_SOURCE_DIR}/crate/registrar/cache.hpp
+    ${CMAKE_SOURCE_DIR}/crate/registrar/submitter.hpp
+    ${CMAKE_SOURCE_DIR}/crate/registrar/retriever.hpp
     ${CMAKE_SOURCE_DIR}/crate/registrar/entry/node_v1.hpp
 )
 
 set(SOURCES
    ${CMAKE_SOURCE_DIR}/crate/externals/simplejson/json.cpp
+   ${CMAKE_SOURCE_DIR}/crate/externals/uuid4/uuid4.c
    ${CMAKE_SOURCE_DIR}/crate/common/common.cpp
    ${CMAKE_SOURCE_DIR}/crate/registrar/cache.cpp
+   ${CMAKE_SOURCE_DIR}/crate/registrar/submitter.cpp
+   ${CMAKE_SOURCE_DIR}/crate/registrar/retriever.cpp
    ${CMAKE_SOURCE_DIR}/crate/registrar/entry/node_v1.cpp
 )
 

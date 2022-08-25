@@ -41,5 +41,5 @@ install(
   "${INSTALL_INCLUDE_DIR}"
   FILES_MATCHING
   PATTERN
-  "*.hpp"
+  "*.h*"
 )

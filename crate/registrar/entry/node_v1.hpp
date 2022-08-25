@@ -6,6 +6,12 @@
 #include <tuple>
 #include <crate/externals/simplejson/json.hpp>
 
+/*
+   About:
+      A node that can auto encode/decode to/from json/strings. This class
+      is meant as a helper to standardize the submission and retrieval of nodes.
+*/
+
 namespace crate {
 namespace registrar {
 
@@ -20,7 +26,13 @@ public:
       std::string description;
    };
 
+   //! \brief Construct the node
+   //! \note Without setting the node ID the data will be 
+   //!       considered invalid. See `set_id`
    node_v1();
+
+   //! \brief Construct the node with an id
+   node_v1(const std::string& id);
 
    //! \brief Decode node_v1 object from a json string
    //! \param json_data The string to build the node from
@@ -52,11 +64,15 @@ public:
    //!        of this node
    std::tuple<std::string, std::string, std::vector<sensor> > get_data() const;
 
+   //! \brief Clear all data from node
+   //! \post All data will be removed from node
+   void clear();
+
 private:
    bool _invalid {true};
    void check_validity();
-   std::string id;
-   std::string description;
+   std::string _id;
+   std::string _description;
    std::vector<sensor> _sensor_list;
 };
 
