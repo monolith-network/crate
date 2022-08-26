@@ -4,6 +4,8 @@ project(crate)
 
 set(CMAKE_CXX_STANDARD 20)
 
+option(WITH_NETWORKING "Enable crate networking utils (required Nettle)" ON)
+
 include(${CMAKE_SOURCE_DIR}/cmake/SetEnv.cmake)
 
 include_directories($CMAKE_SOURCE_DIR/crate)
@@ -30,6 +32,20 @@ set(SOURCES
    ${CMAKE_SOURCE_DIR}/crate/registrar/entry/node_v1.cpp
    ${CMAKE_SOURCE_DIR}/crate/metrics/reading.cpp
 )
+
+if (WITH_NETWORKING)
+   find_package(Nettle REQUIRED)
+   include_directories(${NETTLE_INCLUDE_DIRS})
+
+   list(APPEND HEADERS 
+      ${CMAKE_SOURCE_DIR}/crate/networking/receiver_if.hpp
+      ${CMAKE_SOURCE_DIR}/crate/networking/tcp_server.hpp
+      ${CMAKE_SOURCE_DIR}/crate/networking/writer.hpp)
+
+   list(APPEND SOURCES 
+      ${CMAKE_SOURCE_DIR}/crate/networking/tcp_server.cpp
+      ${CMAKE_SOURCE_DIR}/crate/networking/writer.cpp)
+endif()
 
 include(${CMAKE_SOURCE_DIR}/cmake/LibraryConfig.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/InstallConfig.cmake)
