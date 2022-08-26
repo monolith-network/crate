@@ -18,7 +18,6 @@ sensor_reading_v1::sensor_reading_v1(int64_t timestamp,
                                        _node_id(id),
                                        _sensor_id(sensor_id),
                                        _value(value) {
-   // 
 }
 
 void sensor_reading_v1::stamp()
