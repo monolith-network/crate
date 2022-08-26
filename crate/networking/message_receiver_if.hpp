@@ -1,5 +1,5 @@
-#ifndef CRATE_NETWORKING_RECEIVER_IF_HPP
-#define CRATE_NETWORKING_RECEIVER_IF_HPP
+#ifndef CRATE_NETWORKING_MESSAGE_RECEIVER_IF_HPP
+#define CRATE_NETWORKING_MESSAGE_RECEIVER_IF_HPP
 
 #include <string>
 
@@ -16,7 +16,7 @@ namespace networking {
 
 //! \brief Simple receiver interface to allow for the receiving of a single message
 //!        from an external source.
-class receiver_if {
+class message_receiver_if {
 public:
    //! \brief Receive the message
    //! \param message The message to receive

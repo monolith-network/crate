@@ -38,13 +38,13 @@ if (WITH_NETWORKING)
    include_directories(${NETTLE_INCLUDE_DIRS})
 
    list(APPEND HEADERS 
-      ${CMAKE_SOURCE_DIR}/crate/networking/receiver_if.hpp
-      ${CMAKE_SOURCE_DIR}/crate/networking/tcp_server.hpp
-      ${CMAKE_SOURCE_DIR}/crate/networking/writer.hpp)
+      ${CMAKE_SOURCE_DIR}/crate/networking/message_receiver_if.hpp
+      ${CMAKE_SOURCE_DIR}/crate/networking/message_server.hpp
+      ${CMAKE_SOURCE_DIR}/crate/networking/message_writer.hpp)
 
    list(APPEND SOURCES 
-      ${CMAKE_SOURCE_DIR}/crate/networking/tcp_server.cpp
-      ${CMAKE_SOURCE_DIR}/crate/networking/writer.cpp)
+      ${CMAKE_SOURCE_DIR}/crate/networking/message_server.cpp
+      ${CMAKE_SOURCE_DIR}/crate/networking/message_writer.cpp)
 endif()
 
 include(${CMAKE_SOURCE_DIR}/cmake/LibraryConfig.cmake)
