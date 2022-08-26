@@ -8,6 +8,8 @@ namespace crate {
 namespace metrics {
 namespace streams {
 
+stream_data_v1::stream_data_v1() {}
+
 stream_data_v1::stream_data_v1(uint64_t sequence) : _timestamp(0), _sequence(sequence) {}
 
 stream_data_v1::stream_data_v1(uint64_t sequence,

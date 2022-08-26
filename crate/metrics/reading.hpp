@@ -8,15 +8,6 @@
 namespace crate {
 namespace metrics {
 
-/*
-   {
-      "timestamp": 1661463750264,
-      "node_id": "asoidj-askdaskl-aslkdmasd-asda",
-      "sensor_id": "aksldma-asdasdas-asdasd-asdasd",
-      "value": 0.0123
-   }
-*/
-
 //! \brief A sensor reading off of a node
 class sensor_reading_v1 {
 

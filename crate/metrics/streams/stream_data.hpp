@@ -9,27 +9,6 @@ namespace crate {
 namespace metrics {
 namespace streams {
 
-/*
-{
-  "timestamp": 1661534969,
-  "sequence": 0,
-  "data": [
-       {
-          "timestamp": 1661463750264,
-          "node_id": "asoidj-askdaskl-aslkdmasd-asda",
-          "sensor_id": "aksldma-asdasdas-asdasd-asdasd",
-          "value": 0.0123
-       },
-       {
-          "timestamp": 1661463750274,
-          "node_id": "asoidj-askdaskl-aslkdmasd-asda",
-          "sensor_id": "aksldma-asdasdas-asdasd-asdasd",
-          "value": 0.0123
-       }
-  ]
-}
-*/
-
 //! \brief  A chunk of stream data made up of a group of metrics
 //!         meant to be sent in a sequence to a destination.
 //! \note   For any chunk of stream data to be valid there MUST be
@@ -40,7 +19,7 @@ namespace streams {
 class stream_data_v1 {
 public:
    //! \brief Create the stream data with no data set
-   stream_data_v1() {};
+   stream_data_v1();
 
    //! \brief Construct a stream with no data
    //! \param sequence The sequence number of the stream data
