@@ -51,14 +51,7 @@ public:
    void serverStopping() override {}
    void serverStopped() override {}
 
-   // Handle parsing and routing network message with async
-   //
-   void async_cb(char* data_buffer, uint32_t size) {
-      std::string data_json(data_buffer, size);
-      _data_handler_cb(data_json);
-   }
-
-   void newConnection(nettle::Socket& connection) override {
+   void newConnection(nettle::Socket connection) override {
 
       // Read in 4 bytes to see the size of the message coming in
       //
@@ -72,10 +65,7 @@ public:
       //
       char* data_buffer = new char[incoming_size];
       auto read_in = connection.socketReadIn(data_buffer, incoming_size);
-      connection.socketClose();
-
       _data_handler_cb(std::string(data_buffer));
-
       delete []data_buffer;
    }
 
@@ -136,7 +126,6 @@ void message_server::handle(std::string data) {
       return;
    }
 
-   // Here we are still running in the nettle thread. 
    // Since the receiver doesn't care to talk back to the client
    // we will launch an async thread so receiver processing doesn't
    // hold up a connection
