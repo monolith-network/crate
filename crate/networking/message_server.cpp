@@ -68,7 +68,7 @@ public:
       char* data_buffer = new char[incoming_size];
       connection.socketReadIn(data_buffer, incoming_size);
 
-      _data_handler_cb(std::string(data_buffer));
+      _data_handler_cb(std::string(data_buffer, incoming_size));
       delete []data_buffer;
    }
 
