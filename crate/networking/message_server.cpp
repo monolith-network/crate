@@ -58,13 +58,16 @@ public:
       uint8_t buffer[4];
       connection.socketReadIn(buffer, 4 * sizeof(buffer[0]));
 
-      uint32_t incoming_size = 
-         buffer[0] | (buffer[1] << 8) | (buffer[2] << 16) | (buffer[3] << 24);
+      uint32_t incoming_size = static_cast<uint32_t>(buffer[3]) << 24;
+      incoming_size |= static_cast<uint32_t>(buffer[2]) << 16;
+      incoming_size |= static_cast<uint32_t>(buffer[1]) << 8;
+      incoming_size |= static_cast<uint32_t>(buffer[0]) << 0;
 
       // Read in that number of bytes
       //
       char* data_buffer = new char[incoming_size];
-      auto read_in = connection.socketReadIn(data_buffer, incoming_size);
+      connection.socketReadIn(data_buffer, incoming_size);
+
       _data_handler_cb(std::string(data_buffer));
       delete []data_buffer;
    }

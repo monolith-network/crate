@@ -25,10 +25,10 @@ int message_writer::write(std::string data, bool& okay) {
    uint32_t data_len = data.length();
 
    uint8_t data_len_buffer[4];
-   data_len_buffer[0] = data_len << 0;
-   data_len_buffer[1] = data_len << 8;
-   data_len_buffer[2] = data_len << 16;
-   data_len_buffer[3] = data_len << 24;
+   data_len_buffer[0] = data_len >> 0;
+   data_len_buffer[1] = data_len >> 8;
+   data_len_buffer[2] = data_len >> 16;
+   data_len_buffer[3] = data_len >> 24;
 
    // Write out expected length
    writer.socketWriteOut(data_len_buffer, 4 * sizeof(data_len_buffer[0]));
