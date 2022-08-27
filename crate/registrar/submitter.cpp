@@ -24,7 +24,13 @@ submitter::result submitter::submit(node_v1& node) {
    
    auto [id, desc, sensors] = node.get_data();
 
-   auto result = cli.Get("/submit/" + id + "/" + encoded_node);
+   std::string submission = "/submit/" + id + "/" + encoded_node;
+
+   if (submission.size() >= HTTP_URL_MAX_LEN) {
+      return result::REQUEST_EXCEEDS_URL_MAX_LENGTH;
+   }
+
+   auto result = cli.Get(submission);
 
    if (!result || (result.error() != httplib::Error::Success)) {
       return result::UNABLE_TO_REACH_REGISTRAR;

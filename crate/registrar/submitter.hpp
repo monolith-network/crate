@@ -19,6 +19,7 @@ public:
    //! \brief The results that can come from the node submitter
    enum class result {
       SUCCESS,
+      REQUEST_EXCEEDS_URL_MAX_LENGTH,
       SUBMISSION_FAILURE,
       INVALID_NODE_DATA,
       UNABLE_TO_REACH_REGISTRAR,
@@ -41,6 +42,7 @@ public:
    result submit(node_v1& node);
 
 private:
+   static constexpr uint32_t HTTP_URL_MAX_LEN = 2048;
    std::string _registrar_address;
    short _registrar_port;
 };
