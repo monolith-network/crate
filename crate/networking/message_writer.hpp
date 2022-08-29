@@ -8,13 +8,13 @@ namespace crate {
 namespace networking {
 
 //! \brief Write message to a message server
-class message_writer
+class message_writer_c
 {
 public:
    //! \brief Create a writer
    //! \param address The IPV4 Address to write to
    //! \param port The port to write to
-   message_writer(const std::string& address, uint32_t port);
+   message_writer_c(const std::string& address, uint32_t port);
 
    //! \brief Change the destination that the writer will write to
    //! \param address The IPV4 Address to write to

@@ -5,29 +5,29 @@ namespace crate {
 namespace metrics {
 namespace streams {
 
-helper::helper(const std::string& address, uint32_t port){
+helper_c::helper_c(const std::string& address, uint32_t port){
    _http_client = new httplib::Client(address, port); 
 }
 
-helper::~helper() {
+helper_c::~helper_c() {
    if (_http_client) {
       delete _http_client;
    }
 }
 
-helper::result helper::register_as_metric_stream_receiver(const std::string& address, uint32_t port) {
+helper_c::result helper_c::register_as_metric_stream_receiver(const std::string& address, uint32_t port) {
 
    std::string path = "/metric/stream/add/" + address + "/" + std::to_string(port);
    return issue_command(path);
 }
 
-helper::result helper::deregister_as_metric_stream_receiver(const std::string& address, uint32_t port) {
+helper_c::result helper_c::deregister_as_metric_stream_receiver(const std::string& address, uint32_t port) {
 
    std::string path = "/metric/stream/delete/" + address + "/" + std::to_string(port);
    return issue_command(path);
 }
 
-helper::result helper::issue_command(const std::string& path) {
+helper_c::result helper_c::issue_command(const std::string& path) {
    
    auto result = _http_client->Get(path);
    

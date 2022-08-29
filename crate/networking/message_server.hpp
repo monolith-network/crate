@@ -10,11 +10,11 @@ namespace networking {
 
 class tcp_handler;
 //! \brief A basic tcp server that when a message is received it forwards it on to the receiver interface
-class message_server {
+class message_server_c {
 public:
    //! \brief Create the message server with and addres, port, and receiver interface
-   message_server(const std::string& address, uint32_t port, message_receiver_if* receiver);
-   ~message_server();
+   message_server_c(const std::string& address, uint32_t port, message_receiver_if* receiver);
+   ~message_server_c();
 
    //! \brief Start the server
    //! \returns true iff the server could start

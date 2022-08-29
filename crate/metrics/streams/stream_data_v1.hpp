@@ -16,20 +16,20 @@ namespace streams {
 //!         No stream server shall send invalid stream data, though
 //!         that does not mean that invalid data can not be received.
 //!          - The network is a dangerous place for data
-class stream_data_v1 {
+class stream_data_v1_c {
 public:
    //! \brief Create the stream data with no data set
-   stream_data_v1();
+   stream_data_v1_c();
 
    //! \brief Construct a stream with no data
    //! \param sequence The sequence number of the stream data
-   stream_data_v1(uint64_t sequence);
+   stream_data_v1_c(uint64_t sequence);
 
    //! \brief Construct a stream with data
    //! \param metrics The data to create the stream with
    //! \param sequence The sequence number of the stream data
-   stream_data_v1(uint64_t sequence, 
-                  std::vector<crate::metrics::sensor_reading_v1> metrics);
+   stream_data_v1_c(uint64_t sequence, 
+                  std::vector<crate::metrics::sensor_reading_v1_c> metrics);
 
    //! \brief Set the time stamp to the time of this call
    //! \post the timestamp will be set to the ms since epoch
@@ -37,14 +37,14 @@ public:
 
    //! \brief Add a single metric to the stream
    //! \param metric The metric to add to the stream
-   void add_metric(crate::metrics::sensor_reading_v1 metric);
+   void add_metric(crate::metrics::sensor_reading_v1_c metric);
    
-   //! \brief Decode stream_data_v1 object from a json string
+   //! \brief Decode stream_data_v1_c object from a json string
    //! \param json_data The string to build the data from
    //! \returns true iff the string could be fully decoded
    bool decode_from(const std::string& json_data);
 
-   //! \brief Decode stream_data_v1 object from a json object
+   //! \brief Decode stream_data_v1_c object from a json object
    //! \param json_object The object to build the data from
    //! \returns true iff the string could be fully decoded
    bool decode_from(json::jobject json_object);
@@ -67,11 +67,11 @@ public:
    //! \returns timestamp, sequence, and metric data in that order
    std::tuple<int64_t, 
                uint64_t, 
-               std::vector<crate::metrics::sensor_reading_v1>> get_data();
+               std::vector<crate::metrics::sensor_reading_v1_c>> get_data();
 private:
    int64_t _timestamp {0};
    uint64_t _sequence {0};
-   std::vector<crate::metrics::sensor_reading_v1> _data;
+   std::vector<crate::metrics::sensor_reading_v1_c> _data;
 
    // Tiemstamp must be set, and _data must have metrics
    bool _invalid {true};

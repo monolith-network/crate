@@ -16,7 +16,7 @@ namespace crate {
 namespace registrar {
 
 //! \brief A node 
-class node_v1 {
+class node_v1_c {
 public:
 
    //! \brief A sensor representation
@@ -29,17 +29,17 @@ public:
    //! \brief Construct the node
    //! \note Without setting the node ID the data will be 
    //!       considered invalid. See `set_id`
-   node_v1();
+   node_v1_c();
 
    //! \brief Construct the node with an id
-   node_v1(const std::string& id);
+   node_v1_c(const std::string& id);
 
-   //! \brief Decode node_v1 object from a json string
+   //! \brief Decode node_v1_c object from a json string
    //! \param json_data The string to build the node from
    //! \returns true iff the string could be fully decoded
    bool decode_from(const std::string& json_data);
 
-   //! \brief Decode node_v1 object from a json object
+   //! \brief Decode node_v1_c object from a json object
    //! \param json_object The object to build the node from
    //! \returns true iff the string could be fully decoded
    bool decode_from(json::jobject json_object);

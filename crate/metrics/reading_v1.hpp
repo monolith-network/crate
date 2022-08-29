@@ -9,18 +9,18 @@ namespace crate {
 namespace metrics {
 
 //! \brief A sensor reading off of a node
-class sensor_reading_v1 {
+class sensor_reading_v1_c {
 
 public:
    //! \brief Create the sensor with no data set
-   sensor_reading_v1();
+   sensor_reading_v1_c();
 
    //! \brief Create the sensor reading 
    //! \param timestamp Seconds since epoch
    //! \param id The id of the the node reporting data
    //! \param sensor_id The id of the sensor
    //! \param value The _value from the sensor
-   sensor_reading_v1(int64_t timestamp, 
+   sensor_reading_v1_c(int64_t timestamp, 
                      std::string id, 
                      std::string sensor_id, 
                      double value);
@@ -29,12 +29,12 @@ public:
    //! \post the timestamp will be set to the ms since epoch
    void stamp();
 
-   //! \brief Decode sensor_reading_v1 object from a json string
+   //! \brief Decode sensor_reading_v1_c object from a json string
    //! \param json_data The string to build the reading from
    //! \returns true iff the string could be fully decoded
    bool decode_from(const std::string& json_data);
 
-   //! \brief Decode sensor_reading_v1 object from a json object
+   //! \brief Decode sensor_reading_v1_c object from a json object
    //! \param json_object The object to build the reading from
    //! \returns true iff the string could be fully decoded
    bool decode_from(json::jobject json_object);

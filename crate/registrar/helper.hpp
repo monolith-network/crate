@@ -10,7 +10,7 @@ namespace registrar {
 
 //! \brief A class that interfaces with the registrar and attempts
 //!        to submit node data.
-class helper {
+class helper_c {
 public:
 
    //! \brief The results that can come from the node submitter
@@ -27,31 +27,37 @@ public:
    };
    
    //! \brief Remove the default constructor
-   helper() = delete;
+   helper_c() = delete;
 
-   //! \brief Destroy helper
-   ~helper();
+   //! \brief Destroy helper_c
+   ~helper_c();
 
    //! \brief Create the node submitter
    //! \param address The address of monolith
    //! \param port The port of monolith
-   helper(const std::string& address, uint32_t port);
+   helper_c(const std::string& address, uint32_t port);
 
    //! \brief Attempt to submit v1 node data to the registrar
    //! \param node The node to push to the registrar
    //! \returns result of submission
-   result submit(node_v1& node);
+   result submit(node_v1_c& node);
 
    //! \brief Attempt to retrieve a v1 node data from the registrar
    //! \param[in] id The id to retrieve 
    //! \param[out] node The node to retrieve from the registrar
    //! \returns result of retrieval, node should only be considered valid
    //!          if result = result::SUCCESS
-   result retrieve(const std::string& id,  node_v1& node);
+   result retrieve(const std::string& id,  node_v1_c& node);
+
+   //! \brief Attempt to remove a v1 node data from the registrar
+   //! \param id The id to remove 
+   //! \returns result of removal
+   result remove(const std::string& id);
 
 private:
    static constexpr uint16_t HTTP_URL_MAX_LEN = 2048;
    httplib::Client* _http_client {nullptr};
+   result issue_command(const std::string& path);
 };
 
 } // namespace registrar

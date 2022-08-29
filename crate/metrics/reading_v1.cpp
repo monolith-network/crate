@@ -6,11 +6,11 @@
 namespace crate {
 namespace metrics {
 
-sensor_reading_v1::sensor_reading_v1() {
+sensor_reading_v1_c::sensor_reading_v1_c() {
 
 }
 
-sensor_reading_v1::sensor_reading_v1(int64_t timestamp, 
+sensor_reading_v1_c::sensor_reading_v1_c(int64_t timestamp, 
                                        std::string id, 
                                        std::string sensor_id, 
                                        double value) 
@@ -20,14 +20,14 @@ sensor_reading_v1::sensor_reading_v1(int64_t timestamp,
                                        _value(value) {
 }
 
-void sensor_reading_v1::stamp()
+void sensor_reading_v1_c::stamp()
 {
    _timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(
       std::chrono::system_clock::now().time_since_epoch()
    ).count();
 }
 
-bool sensor_reading_v1::decode_from(const std::string& json_data) {
+bool sensor_reading_v1_c::decode_from(const std::string& json_data) {
 
    json::jobject json_result;
    if (!json::jobject::tryparse(json_data.c_str(), json_result)) {
@@ -36,7 +36,7 @@ bool sensor_reading_v1::decode_from(const std::string& json_data) {
    return decode_from(json_result);
 }
 
-bool sensor_reading_v1::decode_from(json::jobject json_object) {
+bool sensor_reading_v1_c::decode_from(json::jobject json_object) {
 
    if (!json_object.has_key("timestamp")) {
       return false;
@@ -67,7 +67,7 @@ bool sensor_reading_v1::decode_from(json::jobject json_object) {
    return !_invalid;
 }
 
-bool sensor_reading_v1::encode_to(std::string& output_string) {
+bool sensor_reading_v1_c::encode_to(std::string& output_string) {
 
    check_valid();
    if (_invalid) {
@@ -84,7 +84,7 @@ bool sensor_reading_v1::encode_to(std::string& output_string) {
    return true;
 }
 
-void sensor_reading_v1::check_valid() {
+void sensor_reading_v1_c::check_valid() {
    if (_node_id.empty() || 
          _sensor_id.empty() ||
          _timestamp == 0) {
@@ -94,7 +94,7 @@ void sensor_reading_v1::check_valid() {
    }
 }
 
-std::tuple<int64_t, std::string, std::string, double> sensor_reading_v1::getData() {
+std::tuple<int64_t, std::string, std::string, double> sensor_reading_v1_c::getData() {
    return {_timestamp, _node_id, _sensor_id, _value};
 }
    

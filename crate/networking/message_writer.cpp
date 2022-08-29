@@ -3,14 +3,14 @@
 namespace crate {
 namespace networking {
 
-message_writer::message_writer(const std::string& address, uint32_t port) 
+message_writer_c::message_writer_c(const std::string& address, uint32_t port) 
    : _host_port(address, port) {}
 
-void message_writer::change_destination(const std::string& address, uint32_t port) {
+void message_writer_c::change_destination(const std::string& address, uint32_t port) {
    _host_port = nettle::HostPort(address, port);
 }
 
-int message_writer::write(std::string data, bool& okay) {
+int message_writer_c::write(std::string data, bool& okay) {
    okay = false;
 
    nettle::Writer writer(

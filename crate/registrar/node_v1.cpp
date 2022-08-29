@@ -3,11 +3,11 @@
 namespace crate {
 namespace registrar {
 
-node_v1::node_v1(){}
+node_v1_c::node_v1_c(){}
 
-node_v1::node_v1(const std::string& id) : _id(id) {}
+node_v1_c::node_v1_c(const std::string& id) : _id(id) {}
 
-bool node_v1::decode_from(const std::string& json_data) {
+bool node_v1_c::decode_from(const std::string& json_data) {
 
    json::jobject json_result;
    if (!json::jobject::tryparse(json_data.c_str(), json_result)) {
@@ -16,7 +16,7 @@ bool node_v1::decode_from(const std::string& json_data) {
    return decode_from(json_result);
 }
 
-bool node_v1::decode_from(json::jobject json_object) {
+bool node_v1_c::decode_from(json::jobject json_object) {
 
    if (!json_object.has_key("id")) {
       return false;
@@ -70,7 +70,7 @@ bool node_v1::decode_from(json::jobject json_object) {
    return !_invalid;
 }
 
-bool node_v1::encode_to(std::string& output_string) {
+bool node_v1_c::encode_to(std::string& output_string) {
 
    check_validity();
    if (_invalid) {
@@ -102,15 +102,15 @@ bool node_v1::encode_to(std::string& output_string) {
    return true;   
 }
 
-void node_v1::set_id(const std::string& id) {
+void node_v1_c::set_id(const std::string& id) {
    _id = id;
 }
 
-void node_v1::set_description(const std::string& description) {
+void node_v1_c::set_description(const std::string& description) {
    _description = description;
 }
 
-bool node_v1::add_sensor(node_v1::sensor new_sensor) {
+bool node_v1_c::add_sensor(node_v1_c::sensor new_sensor) {
    if (new_sensor.id.empty()) {
       return false;
    }
@@ -125,7 +125,7 @@ bool node_v1::add_sensor(node_v1::sensor new_sensor) {
    return true;
 }
 
-void node_v1::check_validity() {
+void node_v1_c::check_validity() {
    if (_id.empty()) {
       _invalid = true;
       return;
@@ -136,12 +136,12 @@ void node_v1::check_validity() {
 std::tuple<
    std::string, 
    std::string, 
-   std::vector<node_v1::sensor> 
-      > node_v1::get_data() const {
+   std::vector<node_v1_c::sensor> 
+      > node_v1_c::get_data() const {
    return {_id, _description, _sensor_list};
 }
 
-void node_v1::clear() {
+void node_v1_c::clear() {
    _invalid = true;
    _id.clear();
    _description.clear();

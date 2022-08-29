@@ -8,7 +8,7 @@ namespace crate {
 namespace metrics {
 namespace streams {
 
-class helper {
+class helper_c {
 public:
    //! \brief The results that can come from the node submitter
    enum class result {
@@ -21,15 +21,15 @@ public:
    };
 
    //! \brief Remove the default constructor
-   helper() = delete;
+   helper_c() = delete;
 
-   //! \brief Destroy the helper
-   ~helper();
+   //! \brief Destroy the helper_c
+   ~helper_c();
 
    //! \brief Create the node submitter
    //! \param address The address of monolith
    //! \param port The port of the monolith
-   helper(const std::string& address, uint32_t port);
+   helper_c(const std::string& address, uint32_t port);
 
    //! \brief Register an address and port as a metric stream receiver
    //! \param address The address to register as a receiver

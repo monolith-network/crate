@@ -8,27 +8,27 @@ namespace crate {
 namespace metrics {
 namespace streams {
 
-stream_data_v1::stream_data_v1() {}
+stream_data_v1_c::stream_data_v1_c() {}
 
-stream_data_v1::stream_data_v1(uint64_t sequence) : _timestamp(0), _sequence(sequence) {}
+stream_data_v1_c::stream_data_v1_c(uint64_t sequence) : _timestamp(0), _sequence(sequence) {}
 
-stream_data_v1::stream_data_v1(uint64_t sequence,
-                               std::vector<crate::metrics::sensor_reading_v1> metrics) 
+stream_data_v1_c::stream_data_v1_c(uint64_t sequence,
+                               std::vector<crate::metrics::sensor_reading_v1_c> metrics) 
                                : _timestamp(0), 
                                  _sequence(sequence),
                                  _data(metrics) {}
 
-void stream_data_v1::stamp() {
+void stream_data_v1_c::stamp() {
    _timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(
       std::chrono::system_clock::now().time_since_epoch()
    ).count();
 }
 
-void stream_data_v1::add_metric(crate::metrics::sensor_reading_v1 metric) {
+void stream_data_v1_c::add_metric(crate::metrics::sensor_reading_v1_c metric) {
    _data.push_back(metric);
 }
 
-bool stream_data_v1::decode_from(const std::string& json_data) {
+bool stream_data_v1_c::decode_from(const std::string& json_data) {
 
    json::jobject json_result;
    if (!json::jobject::tryparse(json_data.c_str(), json_result)) {
@@ -37,7 +37,7 @@ bool stream_data_v1::decode_from(const std::string& json_data) {
    return decode_from(json_result);
 }
 
-bool stream_data_v1::decode_from(json::jobject json_object) {
+bool stream_data_v1_c::decode_from(json::jobject json_object) {
    if (!json_object.has_key("timestamp")) {
       return false;
    }
@@ -62,7 +62,7 @@ bool stream_data_v1::decode_from(json::jobject json_object) {
    for(size_t i = 0; i < data_array.size(); i++) {
       json::jobject entry = data_array.array(i);
 
-      crate::metrics::sensor_reading_v1 reading;
+      crate::metrics::sensor_reading_v1_c reading;
 
       if (!reading.decode_from(entry)) {
          return false;
@@ -81,7 +81,7 @@ bool stream_data_v1::decode_from(json::jobject json_object) {
    return !_invalid;
 }
 
-bool stream_data_v1::encode_to(std::string& output_string) {
+bool stream_data_v1_c::encode_to(std::string& output_string) {
 
    check_validity();
    if (_invalid) {
@@ -107,21 +107,21 @@ bool stream_data_v1::encode_to(std::string& output_string) {
    return true;
 }
 
-size_t stream_data_v1::size() const {
+size_t stream_data_v1_c::size() const {
    return _data.size();
 }
 
-bool stream_data_v1::empty() const {
+bool stream_data_v1_c::empty() const {
    return _data.empty();
 }
 
 std::tuple<int64_t, 
                uint64_t, 
-               std::vector<crate::metrics::sensor_reading_v1>> stream_data_v1::get_data() {
+               std::vector<crate::metrics::sensor_reading_v1_c>> stream_data_v1_c::get_data() {
    return {_timestamp, _sequence, _data};
 }
 
-void stream_data_v1::check_validity() {
+void stream_data_v1_c::check_validity() {
    if (_timestamp == 0 || empty()) {
       _invalid = true;
    } else {

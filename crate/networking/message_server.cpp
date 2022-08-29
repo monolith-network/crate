@@ -25,15 +25,15 @@ void nettle_socket_error_cb(nettle::SocketError error) {
 
    switch (error)
    {
-      case nettle::SocketError::SET_SOCK_OPT_RECV_TO:      LOG(TRACE) << TAG("crate::message_server::nettle_socket_error_cb") << "SET_SOCK_OPT_RECV_TO"      << std::endl; break;
-      case nettle::SocketError::SET_SOCK_OPT_SEND_TO:      LOG(TRACE) << TAG("crate::message_server::nettle_socket_error_cb") << "SET_SOCK_OPT_SEND_TO"      << std::endl; break; 
-      case nettle::SocketError::SOCKET_WRITE:              LOG(TRACE) << TAG("crate::message_server::nettle_socket_error_cb") << "SOCKET_WRITE"              << std::endl; break;
-      case nettle::SocketError::ATTEMPT_INIT_SETUP_SOCKET: LOG(TRACE) << TAG("crate::message_server::nettle_socket_error_cb") << "ATTEMPT_INIT_SETUP_SOCKET" << std::endl; break;
-      case nettle::SocketError::SOCKET_CREATE:             LOG(TRACE) << TAG("crate::message_server::nettle_socket_error_cb") << "SOCKET_CREATE"             << std::endl; break;
-      case nettle::SocketError::SOCKET_BIND:               LOG(TRACE) << TAG("crate::message_server::nettle_socket_error_cb") << "SOCKET_BIND"               << std::endl; break;
-      case nettle::SocketError::SOCKET_LISTEN:             LOG(TRACE) << TAG("crate::message_server::nettle_socket_error_cb") << "SOCKET_LISTEN"             << std::endl; break;
-      case nettle::SocketError::WSAStartup:                LOG(TRACE) << TAG("crate::message_server::nettle_socket_error_cb") << "WSAStartup"                << std::endl; break;
-      case nettle::SocketError::SOCKET_REUSEADDR:          LOG(TRACE) << TAG("crate::message_server::nettle_socket_error_cb") << "SOCKET_REUSEADDR"          << std::endl; break;
+      case nettle::SocketError::SET_SOCK_OPT_RECV_TO:      LOG(TRACE) << TAG("crate::message_server_c::nettle_socket_error_cb") << "SET_SOCK_OPT_RECV_TO"      << std::endl; break;
+      case nettle::SocketError::SET_SOCK_OPT_SEND_TO:      LOG(TRACE) << TAG("crate::message_server_c::nettle_socket_error_cb") << "SET_SOCK_OPT_SEND_TO"      << std::endl; break; 
+      case nettle::SocketError::SOCKET_WRITE:              LOG(TRACE) << TAG("crate::message_server_c::nettle_socket_error_cb") << "SOCKET_WRITE"              << std::endl; break;
+      case nettle::SocketError::ATTEMPT_INIT_SETUP_SOCKET: LOG(TRACE) << TAG("crate::message_server_c::nettle_socket_error_cb") << "ATTEMPT_INIT_SETUP_SOCKET" << std::endl; break;
+      case nettle::SocketError::SOCKET_CREATE:             LOG(TRACE) << TAG("crate::message_server_c::nettle_socket_error_cb") << "SOCKET_CREATE"             << std::endl; break;
+      case nettle::SocketError::SOCKET_BIND:               LOG(TRACE) << TAG("crate::message_server_c::nettle_socket_error_cb") << "SOCKET_BIND"               << std::endl; break;
+      case nettle::SocketError::SOCKET_LISTEN:             LOG(TRACE) << TAG("crate::message_server_c::nettle_socket_error_cb") << "SOCKET_LISTEN"             << std::endl; break;
+      case nettle::SocketError::WSAStartup:                LOG(TRACE) << TAG("crate::message_server_c::nettle_socket_error_cb") << "WSAStartup"                << std::endl; break;
+      case nettle::SocketError::SOCKET_REUSEADDR:          LOG(TRACE) << TAG("crate::message_server_c::nettle_socket_error_cb") << "SOCKET_REUSEADDR"          << std::endl; break;
       default: break;
    }
 
@@ -76,21 +76,21 @@ private:
    std::function<void(std::string message)> _data_handler_cb;
 };
 
-message_server::message_server(const std::string& address, uint32_t port, message_receiver_if* receiver) 
+message_server_c::message_server_c(const std::string& address, uint32_t port, message_receiver_if* receiver) 
    : _host_port(address, port),
       _receiver(receiver) {
 
 }
 
-message_server::~message_server() {
+message_server_c::~message_server_c() {
 
 }
 
-bool message_server::start() {
+bool message_server_c::start() {
    if (!_nettle_server) {
       if (!_handler) {
          _handler = new tcp_handler(
-               std::bind(&message_server::handle, this, std::placeholders::_1)
+               std::bind(&message_server_c::handle, this, std::placeholders::_1)
          );
       }
       _nettle_server = new nettle::TcpServer(
@@ -103,14 +103,14 @@ bool message_server::start() {
    }
 
    if (!_nettle_server->serve()) {
-      LOG(WARNING) << TAG("crate::message_server::start") 
+      LOG(WARNING) << TAG("crate::message_server_c::start") 
                      << "Unable to start nettle tcp server\n";
       return false;
    }
    return true;
 }
 
-void message_server::stop() {
+void message_server_c::stop() {
    if (_nettle_server) {
       _nettle_server->stop();
       if (_handler) {
@@ -122,10 +122,10 @@ void message_server::stop() {
    }
 }
 
-void message_server::handle(std::string data) {
+void message_server_c::handle(std::string data) {
 
    if (!_receiver) {
-      LOG(ERROR) << TAG("message_server::handle") << "Receiver interface was not set\n";
+      LOG(ERROR) << TAG("message_server_c::handle") << "Receiver interface was not set\n";
       return;
    }
 
