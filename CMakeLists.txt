@@ -15,6 +15,7 @@ set(HEADERS
     ${CMAKE_SOURCE_DIR}/crate/externals/simplejson/json.hpp
     ${CMAKE_SOURCE_DIR}/crate/externals/uuid4/uuid4.h
     ${CMAKE_SOURCE_DIR}/crate/common/common.hpp
+    ${CMAKE_SOURCE_DIR}/crate/control/action_v1.hpp
     ${CMAKE_SOURCE_DIR}/crate/registrar/helper.hpp
     ${CMAKE_SOURCE_DIR}/crate/registrar/node_v1.hpp
     ${CMAKE_SOURCE_DIR}/crate/registrar/controller_v1.hpp
@@ -28,6 +29,7 @@ set(SOURCES
    ${CMAKE_SOURCE_DIR}/crate/externals/simplejson/json.cpp
    ${CMAKE_SOURCE_DIR}/crate/externals/uuid4/uuid4.c
    ${CMAKE_SOURCE_DIR}/crate/common/common.cpp
+   ${CMAKE_SOURCE_DIR}/crate/control/action_v1.cpp
    ${CMAKE_SOURCE_DIR}/crate/registrar/helper.cpp
    ${CMAKE_SOURCE_DIR}/crate/registrar/node_v1.cpp
    ${CMAKE_SOURCE_DIR}/crate/registrar/controller_v1.cpp
