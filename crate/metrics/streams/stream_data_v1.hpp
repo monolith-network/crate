@@ -3,7 +3,7 @@
 
 #include <tuple>
 #include <vector>
-#include <crate/metrics/reading.hpp>
+#include <crate/metrics/reading_v1.hpp>
 
 namespace crate {
 namespace metrics {

@@ -3,7 +3,7 @@
 
 #include <tuple>
 #include <vector>
-#include <crate/metrics/streams/stream_data.hpp>
+#include <crate/metrics/streams/stream_data_v1.hpp>
 
 namespace crate {
 namespace metrics {

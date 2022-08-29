@@ -1,8 +1,8 @@
-#include "stream_data.hpp"
+#include "stream_data_v1.hpp"
 #include <chrono>
 #include <sstream>
 #include <crate/externals/simplejson/json.hpp>
-#include <crate/metrics/reading.hpp>
+#include <crate/metrics/reading_v1.hpp>
 
 namespace crate {
 namespace metrics {
