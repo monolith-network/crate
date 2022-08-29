@@ -42,7 +42,7 @@ public:
    result submit(node_v1& node);
 
 private:
-   static constexpr uint32_t HTTP_URL_MAX_LEN = 2048;
+   static constexpr uint16_t HTTP_URL_MAX_LEN = 2048;
    std::string _registrar_address;
    short _registrar_port;
 };
