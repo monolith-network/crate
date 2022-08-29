@@ -14,7 +14,7 @@ class stream_receiver_if {
 public:
    //! \brief Receive a chunk of stream data
    //! \param data The data that was received and needs to be processed
-   virtual void receive_data(stream_data_v1 data) = 0;
+   virtual void receive_data(stream_data_v1_c data) = 0;
 };
 
 } // namespace stream
