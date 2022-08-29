@@ -24,7 +24,7 @@ submitter::result submitter::submit(node_v1& node) {
    
    auto [id, desc, sensors] = node.get_data();
 
-   std::string submission = "/submit/" + id + "/" + encoded_node;
+   std::string submission = "/registrar/node/add/" + id + "/" + encoded_node;
 
    if (submission.size() >= HTTP_URL_MAX_LEN) {
       return result::REQUEST_EXCEEDS_URL_MAX_LENGTH;
