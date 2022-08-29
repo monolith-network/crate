@@ -4,6 +4,7 @@
 #include <string>
 #include <httplib.h>
 #include <crate/registrar/node_v1.hpp>
+#include <crate/registrar/controller_v1.hpp>
 
 namespace crate {
 namespace registrar {
@@ -18,7 +19,7 @@ public:
       SUCCESS,
       REQUEST_EXCEEDS_URL_MAX_LENGTH,
       FAILURE,
-      INVALID_NODE_DATA,
+      INVALID_DATA,
       UNABLE_TO_REACH_REGISTRAR,
       REGISTRAR_INTERNAL_ERROR,
       INTERNAL_ERROR,
@@ -42,14 +43,26 @@ public:
    //! \returns result of submission
    result submit(node_v1_c& node);
 
+   //! \brief Attempt to submit v1 controller data to the registrar
+   //! \param controller The controller to push to the registrar
+   //! \returns result of submission
+   result submit(controller_v1_c& controller);
+
    //! \brief Attempt to retrieve a v1 node data from the registrar
    //! \param[in] id The id to retrieve 
    //! \param[out] node The node to retrieve from the registrar
    //! \returns result of retrieval, node should only be considered valid
    //!          if result = result::SUCCESS
    result retrieve(const std::string& id,  node_v1_c& node);
+   
+   //! \brief Attempt to retrieve a v1 controller's data from the registrar
+   //! \param[in] id The id to retrieve 
+   //! \param[out] controller The controller to retrieve from the registrar
+   //! \returns result of retrieval, node should only be considered valid
+   //!          if result = result::SUCCESS
+   result retrieve(const std::string& id,  controller_v1_c& controller);
 
-   //! \brief Attempt to remove a v1 node data from the registrar
+   //! \brief Attempt to remove data from the registrar
    //! \param id The id to remove 
    //! \returns result of removal
    result remove(const std::string& id);
