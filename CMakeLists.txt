@@ -21,6 +21,7 @@ set(HEADERS
     ${CMAKE_SOURCE_DIR}/crate/registrar/controller_v1.hpp
     ${CMAKE_SOURCE_DIR}/crate/metrics/reading_v1.hpp
     ${CMAKE_SOURCE_DIR}/crate/metrics/heartbeat_v1.hpp
+    ${CMAKE_SOURCE_DIR}/crate/metrics/helper.hpp
     ${CMAKE_SOURCE_DIR}/crate/metrics/streams/helper.hpp
     ${CMAKE_SOURCE_DIR}/crate/metrics/streams/stream_data_v1.hpp
     ${CMAKE_SOURCE_DIR}/crate/metrics/streams/stream_receiver_if.hpp
@@ -37,6 +38,7 @@ set(SOURCES
    ${CMAKE_SOURCE_DIR}/crate/metrics/streams/helper.cpp
    ${CMAKE_SOURCE_DIR}/crate/metrics/reading_v1.cpp
    ${CMAKE_SOURCE_DIR}/crate/metrics/heartbeat_v1.cpp
+   ${CMAKE_SOURCE_DIR}/crate/metrics/helper.cpp
    ${CMAKE_SOURCE_DIR}/crate/metrics/streams/stream_data_v1.cpp
 )
 
