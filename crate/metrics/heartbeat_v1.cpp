@@ -56,7 +56,7 @@ void heartbeat_v1_c::check_valid() {
    }
 }
 
-std::string heartbeat_v1_c::getData() {
+std::string heartbeat_v1_c::get_data() {
    return _id;
 }
    

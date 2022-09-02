@@ -33,7 +33,7 @@ int main(int argc, char** argv) {
       std::exit(1); 
    }
 
-   auto [decoded_ts, decoded_node_id, decoded_sensor_id, decoded_value] = decoded.getData();
+   auto [decoded_ts, decoded_node_id, decoded_sensor_id, decoded_value] = decoded.get_data();
 
    if (decoded_ts != ts) {
       std::cout << "Timestamp does not match\n";

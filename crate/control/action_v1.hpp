@@ -47,7 +47,7 @@ public:
 
    //! \brief Retrieve the timestamp, controller_id, action_id, and _value
    //! \returns A tuple of the values in the order listed above
-   std::tuple<int64_t, std::string, std::string, double> getData();
+   std::tuple<int64_t, std::string, std::string, double> get_data();
 
 private:
    int64_t _timestamp {0};

@@ -68,8 +68,8 @@ int main(int argc, char** argv) {
    }
 
    for (auto i = 0; i < data.size(); i++) {
-      auto [ts, n, s, v] = data[i].getData();
-      auto [_ts, _n, _s, _v] = _data[i].getData();
+      auto [ts, n, s, v] = data[i].get_data();
+      auto [_ts, _n, _s, _v] = _data[i].get_data();
 
       if (ts != _ts) {
          std::cerr << "Data item " << i << " did not have matching timestamps" << std::endl;

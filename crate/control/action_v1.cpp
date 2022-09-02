@@ -94,7 +94,7 @@ void controller_action_v1_c::check_valid() {
    }
 }
 
-std::tuple<int64_t, std::string, std::string, double> controller_action_v1_c::getData() {
+std::tuple<int64_t, std::string, std::string, double> controller_action_v1_c::get_data() {
    return {_timestamp, _controller_id, _action_id, _value};
 }
    

@@ -37,7 +37,7 @@ public:
 
    //! \brief Retrieve the id
    //! \returns A the id
-   std::string getData();
+   std::string get_data();
 
 private:
    std::string _id;

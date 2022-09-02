@@ -94,7 +94,7 @@ void sensor_reading_v1_c::check_valid() {
    }
 }
 
-std::tuple<int64_t, std::string, std::string, double> sensor_reading_v1_c::getData() {
+std::tuple<int64_t, std::string, std::string, double> sensor_reading_v1_c::get_data() {
    return {_timestamp, _node_id, _sensor_id, _value};
 }
    
