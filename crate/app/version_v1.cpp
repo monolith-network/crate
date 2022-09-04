@@ -67,7 +67,7 @@ bool version_v1_c::encode_to(std::string& output_string) {
                      ",\"hash\":\"" + _hash + "\"," +
                      "\"version_major\":\"" + _semver.major + "\"," + 
                      "\"version_minor\":\"" + _semver.minor + "\"," + 
-                     "\"version_patch\":\"" + _semver.patch + "\"," + 
+                     "\"version_patch\":\"" + _semver.patch + "\"" + 
                      "}";
 
    return true;
