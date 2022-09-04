@@ -20,7 +20,7 @@ class controller_v1_c {
 public:
 
    //! \brief An action representation
-   struct action {
+   struct action_s {
       std::string id;
       std::string description;
    };
@@ -32,6 +32,12 @@ public:
 
    //! \brief Construct the controller with an id
    controller_v1_c(const std::string& id);
+
+   //! \brief Construct the controller with an id, desc, address, and port
+   controller_v1_c(const std::string& id,
+                   const std::string& description,
+                   const std::string& address, 
+                   uint32_t port);
 
    //! \brief Decode controller_v1_c object from a json string
    //! \param json_data The string to build the controller from
@@ -52,16 +58,22 @@ public:
    //! \brief Set the controller id
    void set_id(const std::string& id);
 
+   //! \brief Set the ip
+   void set_ip(const std::string& ip);
+
+   //! \brief Set the port
+   void set_port(uint32_t port);
+
    //! \brief Set the controller description
    void set_description(const std::string& description);
 
    //! \brief Add a new action
    //! \returns true iff the action has a unique id
-   bool add_action(action new_action);
+   bool add_action(action_s new_action);
 
    //! \brief Retireve the id, description, ip, port, and action list
    //!        of this controller
-   std::tuple<std::string, std::string, std::string, uint32_t, std::vector<action> > get_data() const;
+   std::tuple<std::string, std::string, std::string, uint32_t, std::vector<action_s> > get_data() const;
 
    //! \brief Clear all data from controller
    //! \post All data will be removed from controller
@@ -74,7 +86,7 @@ private:
    std::string _description;
    std::string _ip;
    uint32_t _port {0};
-   std::vector<action> _action_list;
+   std::vector<action_s> _action_list;
 };
 
 } // namespace registrar

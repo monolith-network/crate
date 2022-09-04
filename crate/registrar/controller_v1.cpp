@@ -8,6 +8,12 @@ controller_v1_c::controller_v1_c(){}
 
 controller_v1_c::controller_v1_c(const std::string& id) : _id(id) {}
 
+controller_v1_c::controller_v1_c(const std::string& id,
+                   const std::string& description,
+                   const std::string& address, 
+                   uint32_t port) 
+                   : _id(id), _description(description), _ip(address), _port(port) {}
+
 bool controller_v1_c::decode_from(const std::string& json_data) {
 
    json::jobject json_result;
@@ -121,7 +127,15 @@ void controller_v1_c::set_description(const std::string& description) {
    _description = description;
 }
 
-bool controller_v1_c::add_action(controller_v1_c::action new_action) {
+void controller_v1_c::set_ip(const std::string& ip) {
+   _ip = ip;
+}
+
+void controller_v1_c::set_port(uint32_t port) {
+   _port = port;
+}
+
+bool controller_v1_c::add_action(controller_v1_c::action_s new_action) {
    if (new_action.id.empty()) {
       return false;
    }
@@ -149,7 +163,7 @@ std::tuple<
    std::string, 
    std::string,
    uint32_t,
-   std::vector<controller_v1_c::action> 
+   std::vector<controller_v1_c::action_s> 
       > controller_v1_c::get_data() const {
    return {_id, _description, _ip, _port, _action_list};
 }
