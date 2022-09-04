@@ -11,6 +11,7 @@ include(${CMAKE_SOURCE_DIR}/cmake/SetEnv.cmake)
 include_directories($CMAKE_SOURCE_DIR/crate)
 
 set(HEADERS
+   ${CMAKE_SOURCE_DIR}/crate/app/version_v1.hpp
     ${CMAKE_SOURCE_DIR}/crate/externals/aixlog/logger.hpp
     ${CMAKE_SOURCE_DIR}/crate/externals/simplejson/json.hpp
     ${CMAKE_SOURCE_DIR}/crate/externals/uuid4/uuid4.h
@@ -28,6 +29,7 @@ set(HEADERS
 )
 
 set(SOURCES
+   ${CMAKE_SOURCE_DIR}/crate/app/version_v1.cpp
    ${CMAKE_SOURCE_DIR}/crate/externals/simplejson/json.cpp
    ${CMAKE_SOURCE_DIR}/crate/externals/uuid4/uuid4.c
    ${CMAKE_SOURCE_DIR}/crate/common/common.cpp

@@ -1,13 +1,13 @@
 #include <iostream>
 #include <vector>
-#include <crate/metrics/reading.hpp>
-#include <crate/metrics/streams/stream_data.hpp>
+#include <crate/metrics/reading_v1.hpp>
+#include <crate/metrics/streams/stream_data_v1.hpp>
 #include <crate/externals/uuid4/uuid4.h>
 #include <crate/common/common.hpp>
 
 namespace {
 
-   std::vector<crate::metrics::sensor_reading_v1> readings;
+   std::vector<crate::metrics::sensor_reading_v1_c> readings;
 }
 
 void populate_readings(size_t num) {
@@ -19,7 +19,7 @@ void populate_readings(size_t num) {
       char buffer[UUID4_LEN];
       uuid4_generate(buffer);
 
-      crate::metrics::sensor_reading_v1 reading(0, "node_1", std::string(buffer), (double)i + 1.5);
+      crate::metrics::sensor_reading_v1_c reading(0, "node_1", std::string(buffer), (double)i + 1.5);
       reading.stamp();
 
       readings.push_back(reading);
@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
 
    populate_readings(4);
 
-   crate::metrics::streams::stream_data_v1 stream(0 ,readings);
+   crate::metrics::streams::stream_data_v1_c stream(0 ,readings);
    stream.stamp();
 
    std::string encoded;
@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
 
    std::cout << encoded << std::endl;
 
-   crate::metrics::streams::stream_data_v1 decoded_stream;
+   crate::metrics::streams::stream_data_v1_c decoded_stream;
 
    if (!decoded_stream.decode_from(encoded)) {
       std::cout << "Failed to decode from string" << std::endl;
