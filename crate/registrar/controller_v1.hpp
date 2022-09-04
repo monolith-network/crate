@@ -59,9 +59,9 @@ public:
    //! \returns true iff the action has a unique id
    bool add_action(action new_action);
 
-   //! \brief Retireve the id, description, and action list
+   //! \brief Retireve the id, description, ip, port, and action list
    //!        of this controller
-   std::tuple<std::string, std::string, std::vector<action> > get_data() const;
+   std::tuple<std::string, std::string, std::string, uint32_t, std::vector<action> > get_data() const;
 
    //! \brief Clear all data from controller
    //! \post All data will be removed from controller

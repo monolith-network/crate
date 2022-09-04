@@ -4,13 +4,13 @@
 #include <crate/externals/simplejson/json.hpp>
 
 namespace crate {
-namespace metrics {
+namespace control {
 
-controller_action_v1_c::controller_action_v1_c() {
+action_v1_c::action_v1_c() {
 
 }
 
-controller_action_v1_c::controller_action_v1_c(int64_t timestamp, 
+action_v1_c::action_v1_c(int64_t timestamp, 
                                        std::string id, 
                                        std::string action_id, 
                                        double value) 
@@ -20,14 +20,14 @@ controller_action_v1_c::controller_action_v1_c(int64_t timestamp,
                                        _value(value) {
 }
 
-void controller_action_v1_c::stamp()
+void action_v1_c::stamp()
 {
    _timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(
       std::chrono::system_clock::now().time_since_epoch()
    ).count();
 }
 
-bool controller_action_v1_c::decode_from(const std::string& json_data) {
+bool action_v1_c::decode_from(const std::string& json_data) {
 
    json::jobject json_result;
    if (!json::jobject::tryparse(json_data.c_str(), json_result)) {
@@ -36,7 +36,7 @@ bool controller_action_v1_c::decode_from(const std::string& json_data) {
    return decode_from(json_result);
 }
 
-bool controller_action_v1_c::decode_from(json::jobject json_object) {
+bool action_v1_c::decode_from(json::jobject json_object) {
 
    if (!json_object.has_key("timestamp")) {
       return false;
@@ -67,7 +67,7 @@ bool controller_action_v1_c::decode_from(json::jobject json_object) {
    return !_invalid;
 }
 
-bool controller_action_v1_c::encode_to(std::string& output_string) {
+bool action_v1_c::encode_to(std::string& output_string) {
 
    check_valid();
    if (_invalid) {
@@ -84,7 +84,7 @@ bool controller_action_v1_c::encode_to(std::string& output_string) {
    return true;
 }
 
-void controller_action_v1_c::check_valid() {
+void action_v1_c::check_valid() {
    if (_controller_id.empty() || 
          _action_id.empty() ||
          _timestamp == 0) {
@@ -94,9 +94,9 @@ void controller_action_v1_c::check_valid() {
    }
 }
 
-std::tuple<int64_t, std::string, std::string, double> controller_action_v1_c::get_data() {
+std::tuple<int64_t, std::string, std::string, double> action_v1_c::get_data() {
    return {_timestamp, _controller_id, _action_id, _value};
 }
    
-} // namespace metrics
+} // namespace control
 } // namespace crate

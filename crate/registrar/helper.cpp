@@ -35,7 +35,7 @@ helper_c::result helper_c::submit(controller_v1_c& controller) {
       return result::INVALID_DATA;
    }
    
-   auto [id, desc, actions] = controller.get_data();
+   auto [id, desc, ip, port, actions] = controller.get_data();
 
    std::string submission = "/registrar/add/" + id + "/" + encoded_controller;
    return issue_command(submission);

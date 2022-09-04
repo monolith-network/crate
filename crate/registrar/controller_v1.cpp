@@ -147,15 +147,19 @@ void controller_v1_c::check_validity() {
 std::tuple<
    std::string, 
    std::string, 
+   std::string,
+   uint32_t,
    std::vector<controller_v1_c::action> 
       > controller_v1_c::get_data() const {
-   return {_id, _description, _action_list};
+   return {_id, _description, _ip, _port, _action_list};
 }
 
 void controller_v1_c::clear() {
    _invalid = true;
    _id.clear();
    _description.clear();
+   _ip.clear();
+   _port = 0;
    _action_list.clear();
 }
 
