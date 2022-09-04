@@ -72,6 +72,8 @@ private:
    void check_validity();
    std::string _id;
    std::string _description;
+   std::string _ip;
+   uint32_t _port {0};
    std::vector<action> _action_list;
 };
 

@@ -1,4 +1,5 @@
 #include "controller_v1.hpp"
+#include <sstream>
 
 namespace crate {
 namespace registrar {
@@ -26,6 +27,14 @@ bool controller_v1_c::decode_from(json::jobject json_object) {
       return false;
    }
 
+   if (!json_object.has_key("ip")) {
+      return false;
+   }
+
+   if (!json_object.has_key("port")) {
+      return false;
+   }
+
    if (!json_object.has_key("actions")) {
       return false;
    }
@@ -36,6 +45,11 @@ bool controller_v1_c::decode_from(json::jobject json_object) {
    }
 
    _id = json_object["id"].as_string();
+   _description = json_object["description"].as_string();
+
+   _ip = json_object["ip"].as_string();
+   std::stringstream ts_ss(json_object["port"].as_string());
+   ts_ss >> _port;
    _description = json_object["description"].as_string();
 
    if (suspected_action_list.size() == 0) {
@@ -75,7 +89,9 @@ bool controller_v1_c::encode_to(std::string& output_string) {
 
    output_string.clear();
    std::string s = "{\"id\":\"" + _id + 
-                   "\",\"description\":\"" + _description +
+                   "\",\"ip\":\"" + _ip + 
+                   "\",\"port\":" + std::to_string(_port) + 
+                   ",\"description\":\"" + _description +
                    "\",\"actions\":[";
 
    if (_action_list.empty()) {
