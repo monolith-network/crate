@@ -20,7 +20,13 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+Modification List:
+
+   08-September-2022 [Josh Bosley] => Formatting changes
+
 */
+
 #pragma once
 #include <sys/socket.h>
 #include <errno.h>
@@ -111,7 +117,7 @@ public:
 
 protected:
   template<uint32_t>
-  friend class socket_tcp__serverc;
+  friend class socket_tcp_c;
 
   bool open(int fd) {
     fd_ = fd;
@@ -144,7 +150,7 @@ protected:
 };
 
 template<uint32_t recv_buff_size = 4096>
-class socket_tcp__serverc
+class socket_tcp_c
 {
 public:
   using tcp_connection = socket_tcp_connection_c<recv_buff_size>;
@@ -195,7 +201,7 @@ public:
 
   const char* get_last_error() { return last_error_; };
 
-  ~socket_tcp__serverc() { close("destruct"); }
+  ~socket_tcp_c() { close("destruct"); }
 
   bool accept2(tcp_connection& conn) {
     struct sockaddr_in clientaddr;
@@ -221,7 +227,7 @@ template<typename event_handler, typename conn_user_data = char, uint32_t max_cm
 class admin_cmd_server_c
 {
 public:
-  using tcp_server = socket_tcp__serverc<max_cmd_len>;
+  using tcp_server = socket_tcp_c<max_cmd_len>;
 
   class connection_c
   {
