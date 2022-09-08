@@ -15,6 +15,7 @@ set(HEADERS
     ${CMAKE_SOURCE_DIR}/crate/externals/aixlog/logger.hpp
     ${CMAKE_SOURCE_DIR}/crate/externals/simplejson/json.hpp
     ${CMAKE_SOURCE_DIR}/crate/externals/uuid4/uuid4.h
+    ${CMAKE_SOURCE_DIR}/crate/externals/admincmd/admin_cmd_server.hpp
     ${CMAKE_SOURCE_DIR}/crate/common/common.hpp
     ${CMAKE_SOURCE_DIR}/crate/control/action_v1.hpp
     ${CMAKE_SOURCE_DIR}/crate/registrar/helper.hpp
