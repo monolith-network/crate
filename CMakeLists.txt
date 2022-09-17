@@ -13,6 +13,7 @@ include_directories($CMAKE_SOURCE_DIR/crate)
 set(HEADERS
    ${CMAKE_SOURCE_DIR}/crate/app/version_v1.hpp
     ${CMAKE_SOURCE_DIR}/crate/externals/aixlog/logger.hpp
+    ${CMAKE_SOURCE_DIR}/crate/externals/b64/base64.hpp
     ${CMAKE_SOURCE_DIR}/crate/externals/simplejson/json.hpp
     ${CMAKE_SOURCE_DIR}/crate/externals/uuid4/uuid4.h
     ${CMAKE_SOURCE_DIR}/crate/externals/admincmd/admin_cmd_server.hpp
@@ -32,6 +33,7 @@ set(HEADERS
 set(SOURCES
    ${CMAKE_SOURCE_DIR}/crate/app/version_v1.cpp
    ${CMAKE_SOURCE_DIR}/crate/externals/simplejson/json.cpp
+   ${CMAKE_SOURCE_DIR}/crate/externals/b64/base64.cpp
    ${CMAKE_SOURCE_DIR}/crate/externals/uuid4/uuid4.c
    ${CMAKE_SOURCE_DIR}/crate/common/common.cpp
    ${CMAKE_SOURCE_DIR}/crate/control/action_v1.cpp
